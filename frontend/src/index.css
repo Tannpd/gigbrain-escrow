@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;800&display=swap');
+
+:root {
+  --bg-studio: #121214;
+  --bg-panel: #18181c;
+  --bg-input: #202024;
+  --border-color: #2e2e36;
+  
+  --magenta: #ff007f;
+  --cyan: #00f0ff;
+  --yellow: #e0ff25;
+  --green: #10b981;
+  --red: #ef4444;
+  
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-studio);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-studio);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Designer Grid Overlay */
+.studio-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Figma-Style Canvas Split View */
+.canvas-container {
+  display: grid;
+  grid-template-columns: 1fr 400px 1fr;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .canvas-container {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow-y: auto;
+  }
+}
+
+.panel {
+  background-color: var(--bg-panel);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #151518;
+}
+
+.panel-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Glowing Stamps */
+.stamp {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 4px double;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  text-align: center;
+  letter-spacing: 2px;
+  margin: 20px 0;
+  transform: rotate(-2deg);
+  animation: stamp-glow 1.5s ease-in-out infinite alternate;
+}
+
+.stamp-approved {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: rgba(0, 240, 255, 0.05);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+}
+
+.stamp-rejected {
+  color: var(--magenta);
+  border-color: var(--magenta);
+  background: rgba(255, 0, 127, 0.05);
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.15);
+}
+
+@keyframes stamp-glow {
+  0% {
+    transform: scale(0.98) rotate(-2deg);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  100% {
+    transform: scale(1.02) rotate(-2deg);
+    filter: drop-shadow(0 0 12px currentColor);
+  }
+}
+
+/* Creative Alignment Meter (Circular Progress Bar) */
+.alignment-meter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 32px 0;
+}
+
+.circular-meter {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.circular-meter svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circular-meter circle {
+  fill: none;
+  stroke-width: 10;
+}
+
+.circular-meter .bg-circle {
+  stroke: #25252b;
+}
+
+.circular-meter .progress-circle {
+  stroke: url(#meterGradient);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease-in-out;
+}
+
+.meter-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meter-score {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.meter-lbl {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* Designer Inputs */
+.studio-input-group {
+  margin-bottom: 20px;
+}
+
+.studio-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.studio-input {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.studio-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 1px var(--cyan);
+}
+
+.studio-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Buttons */
+.studio-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--cyan);
+  color: #0b0c10;
+}
+
+.btn-primary:hover {
+  background-color: #00d2e0;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+.btn-accent {
+  background-color: transparent;
+  border: 1px solid var(--magenta);
+  color: var(--magenta);
+}
+
+.btn-accent:hover {
+  background-color: rgba(255, 0, 127, 0.08);
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.25);
+}
+
+.btn-secondary {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-secondary);
+}
+
+.btn-disabled {
+  background-color: #232328;
+  color: var(--text-muted);
+  cursor: not-allowed;
+  border: 1px solid #1a1a1f;
+}
+
+/* Critique Box styling (typewriter-ish) */
+.critique-box {
+  background-color: #131317;
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--yellow);
+  padding: 16px;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #dfebed;
+  white-space: pre-wrap;
+}
+
+.critique-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--yellow);
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+/* Badges */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-active {
+  background-color: rgba(224, 255, 37, 0.1);
+  color: var(--yellow);
+  border: 1px solid rgba(224, 255, 37, 0.2);
+}
+
+.badge-approved {
+  background-color: rgba(0, 240, 255, 0.1);
+  color: var(--cyan);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.badge-rejected {
+  background-color: rgba(255, 0, 127, 0.1);
+  color: var(--magenta);
+  border: 1px solid rgba(255, 0, 127, 0.2);
+}
+
+.badge-failed {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Pulse / Animation utilities */
+.pulse-light {
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.wave-animation {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+}
+
+.wave-bar {
+  width: 3px;
+  background-color: var(--cyan);
+  animation: jump 1s ease-in-out infinite alternate;
+}
+
+.wave-bar:nth-child(2) { animation-delay: 0.2s; background-color: var(--yellow); }
+.wave-bar:nth-child(3) { animation-delay: 0.4s; background-color: var(--magenta); }
+.wave-bar:nth-child(4) { animation-delay: 0.6s; background-color: var(--cyan); }
+.wave-bar:nth-child(5) { animation-delay: 0.8s; background-color: var(--yellow); }
+
+@keyframes jump {
+  0% { height: 4px; }
+  100% { height: 20px; }
+}
