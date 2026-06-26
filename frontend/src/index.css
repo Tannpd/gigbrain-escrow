@@ -53,6 +53,122 @@ body {
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header Styling */
+.studio-header {
+  height: 64px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-panel);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--magenta), var(--cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #121214;
+  font-size: 0.95rem;
+}
+
+.header-title-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-subtitle {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+.header-tag {
+  font-size: 9px;
+  background-color: var(--magenta);
+  color: white;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: 'Fira Code', monospace;
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .header-meta {
+    display: none;
+  }
+}
+
+.meta-badge {
+  background-color: var(--bg-studio);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+}
+
+.meta-badge span {
+  color: var(--text-secondary);
+}
+
+.meta-badge strong {
+  color: var(--text-primary);
+  font-family: 'Fira Code', monospace;
+}
+
+.wallet-btn-container {
+  display: flex;
+  align-items: center;
+}
+
+.wallet-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #202024;
+  border: 1px solid var(--border-color);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-family: 'Fira Code', monospace;
+  color: var(--text-primary);
 }
 
 /* Figma-Style Canvas Split View */
@@ -61,6 +177,7 @@ body {
   grid-template-columns: 1fr 400px 1fr;
   height: calc(100vh - 64px);
   overflow: hidden;
+  flex: 1;
 }
 
 @media (max-width: 1024px) {
@@ -100,10 +217,97 @@ body {
   gap: 8px;
 }
 
+.panel-title.brief-color {
+  color: var(--magenta);
+}
+
+.panel-title.director-color {
+  color: var(--yellow);
+}
+
+.panel-title.delivery-color {
+  color: var(--cyan);
+}
+
 .panel-content {
   padding: 24px;
   overflow-y: auto;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Cards & Layout Components */
+.studio-card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-primary {
+  background-color: #1a1a20;
+}
+
+.card-dark {
+  background-color: #121215;
+}
+
+.card-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.studio-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Specs List details */
+.spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.spec-item span:first-child {
+  color: var(--text-secondary);
+}
+
+.spec-item span:last-child {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: right;
+}
+
+.spec-link-wrapper {
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
 }
 
 /* Glowing Stamps */
@@ -114,10 +318,10 @@ body {
   border: 4px double;
   padding: 12px 24px;
   border-radius: 8px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
   letter-spacing: 2px;
-  margin: 20px 0;
+  margin: 10px 0;
   transform: rotate(-2deg);
   animation: stamp-glow 1.5s ease-in-out infinite alternate;
 }
@@ -154,7 +358,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  margin: 32px 0;
+  margin: 16px 0;
 }
 
 .circular-meter {
@@ -212,17 +416,23 @@ body {
 
 /* Designer Inputs */
 .studio-input-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .studio-label {
-  display: block;
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 8px;
+}
+
+.studio-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .studio-input {
@@ -243,9 +453,29 @@ body {
   box-shadow: 0 0 0 1px var(--cyan);
 }
 
+.studio-input.pr-12 {
+  padding-right: 48px;
+}
+
+.input-tag {
+  position: absolute;
+  right: 16px;
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--text-muted);
+  font-family: 'Fira Code', monospace;
+  pointer-events: none;
+}
+
 .studio-textarea {
   resize: vertical;
   min-height: 100px;
+}
+
+.form-hint {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.4;
 }
 
 /* Buttons */
@@ -269,9 +499,18 @@ body {
   color: #0b0c10;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(.btn-disabled) {
   background-color: #00d2e0;
   box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+.wallet-btn {
+  width: auto;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
 }
 
 .btn-accent {
@@ -280,7 +519,7 @@ body {
   color: var(--magenta);
 }
 
-.btn-accent:hover {
+.btn-accent:hover:not(.btn-disabled) {
   background-color: rgba(255, 0, 127, 0.08);
   box-shadow: 0 0 12px rgba(255, 0, 127, 0.25);
 }
@@ -291,8 +530,9 @@ body {
   color: var(--text-primary);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(.btn-disabled) {
   border-color: var(--text-secondary);
+  background-color: #2a2a30;
 }
 
 .btn-disabled {
@@ -300,6 +540,7 @@ body {
   color: var(--text-muted);
   cursor: not-allowed;
   border: 1px solid #1a1a1f;
+  opacity: 0.6;
 }
 
 /* Critique Box styling (typewriter-ish) */
@@ -314,6 +555,7 @@ body {
   line-height: 1.6;
   color: #dfebed;
   white-space: pre-wrap;
+  margin-top: auto;
 }
 
 .critique-title {
@@ -326,11 +568,160 @@ body {
   letter-spacing: 1px;
 }
 
+/* Telemetry box logs */
+.telemetry-box {
+  background-color: #0c0c0e;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 16px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.telemetry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.telemetry-log {
+  color: #92e0ff;
+  line-height: 1.4;
+}
+
+.telemetry-error {
+  color: var(--magenta);
+}
+
+.telemetry-tx {
+  border-top: 1px solid #1a1a20;
+  padding-top: 8px;
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.65rem;
+}
+
+.telemetry-link {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+.telemetry-link:hover {
+  text-decoration: underline;
+}
+
+/* Ledger List section */
+.ledger-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ledger-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ledger-header-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-secondary);
+}
+
+.ledger-reload-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.ledger-reload-btn:hover {
+  color: var(--text-primary);
+}
+
+.ledger-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.ledger-card {
+  padding: 12px 16px;
+  border-radius: 6px;
+  background-color: #141418;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ledger-card:hover {
+  border-color: var(--text-secondary);
+}
+
+.ledger-card.active {
+  border-color: var(--cyan);
+  background-color: rgba(0, 240, 255, 0.04);
+}
+
+.ledger-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ledger-card-id {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ledger-card-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  font-family: 'Fira Code', monospace;
+  color: var(--text-muted);
+}
+
+.ledger-card-details .amount-value {
+  color: var(--yellow);
+  font-weight: 600;
+}
+
+.ledger-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 6px;
+}
+
 /* Badges */
 .status-badge {
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -360,7 +751,29 @@ body {
   border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
-/* Pulse / Animation utilities */
+/* Footer Info */
+.studio-footer {
+  height: 32px;
+  border-top: 1px solid var(--border-color);
+  background-color: #121214;
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+/* Animation utilities */
+.spin {
+  animation: anim-spin 1.5s linear infinite;
+}
+
+@keyframes anim-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .pulse-light {
   animation: pulse 2s infinite alternate;
 }

@@ -6,9 +6,6 @@ import {
 import { 
   Briefcase, 
   Send, 
-  CheckCircle2, 
-  XCircle, 
-  AlertCircle, 
   Coins, 
   Lock, 
   User, 
@@ -16,9 +13,7 @@ import {
   FileText, 
   Sparkles, 
   RefreshCw, 
-  Code,
-  Check,
-  ChevronRight
+  Code
 } from 'lucide-react';
 
 function App() {
@@ -98,53 +93,52 @@ function App() {
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
   return (
-    <div className="studio-grid min-h-screen flex flex-col">
+    <div className="studio-grid">
+      
       {/* Top Header Navigation */}
-      <header className="h-16 border-b border-[#2e2e36] bg-[#18181c] px-6 flex items-center justify-between z-10">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded bg-gradient-to-tr from-[#ff007f] to-[#00f0ff] flex items-center justify-center font-bold text-black text-sm">
-            GB
-          </div>
-          <div>
-            <h1 className="font-extrabold text-sm tracking-widest text-[#f3f4f6] uppercase flex items-center gap-2">
-              GigBrain Escrow <span className="text-[10px] bg-[#ff007f] text-white px-1.5 py-0.5 rounded font-mono">Arbitrator</span>
+      <header className="studio-header">
+        <div className="header-brand">
+          <div className="brand-logo">GB</div>
+          <div className="header-title-wrapper">
+            <h1 className="header-title">
+              GigBrain Escrow <span className="header-tag">Arbitrator</span>
             </h1>
-            <p className="text-[10px] text-gray-400">Decentralized Creative Freelance Protection</p>
+            <p className="header-subtitle">Decentralized Creative Freelance Protection</p>
           </div>
         </div>
 
         {/* Contract Address & Network Status */}
-        <div className="hidden md:flex items-center gap-4 text-xs">
-          <div className="bg-[#121214] border border-[#2e2e36] px-3 py-1.5 rounded flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#e0ff25] animate-ping" />
-            <span className="text-gray-400">StudioNet Contract:</span>
-            <span className="font-mono text-[#00f0ff]">
+        <div className="header-meta">
+          <div className="meta-badge">
+            <span className="pulse-light" style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--yellow)', display: 'inline-block' }} />
+            <span>StudioNet Contract:</span>
+            <strong>
               {contractAddress ? `${contractAddress.slice(0, 8)}...${contractAddress.slice(-6)}` : 'Not Configured'}
-            </span>
+            </strong>
           </div>
 
-          <div className="bg-[#121214] border border-[#2e2e36] px-3 py-1.5 rounded flex items-center gap-2">
-            <Coins className="w-3.5 h-3.5 text-[#e0ff25]" />
-            <span className="text-gray-400">Escrow Pool:</span>
-            <span className="font-bold text-white">{formatGen(contractBalance)} GEN</span>
+          <div className="meta-badge">
+            <Coins style={{ width: '14px', height: '14px', color: 'var(--yellow)' }} />
+            <span>Escrow Pool:</span>
+            <strong>{formatGen(contractBalance)} GEN</strong>
           </div>
         </div>
 
         {/* Wallet Connection */}
-        <div>
+        <div className="wallet-btn-container">
           {address ? (
-            <div className="flex items-center gap-2 bg-[#1f1f23] border border-[#2e2e36] px-4 py-1.5 rounded-full text-xs">
-              <User className="w-3 h-3 text-[#ff007f]" />
-              <span className="font-mono text-gray-300">
+            <div className="wallet-badge">
+              <User style={{ width: '12px', height: '12px', color: 'var(--magenta)' }} />
+              <span>
                 {address.slice(0, 6)}...{address.slice(-4)}
               </span>
             </div>
           ) : (
             <button 
               onClick={connectWallet}
-              className="bg-[#00f0ff] hover:bg-[#00d2e0] text-[#0b0c10] px-4 py-1.5 rounded-full font-bold text-xs flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(0,240,255,0.2)]"
+              className="studio-btn btn-primary wallet-btn"
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles style={{ width: '14px', height: '14px' }} />
               Connect Studio Wallet
             </button>
           )}
@@ -152,26 +146,26 @@ function App() {
       </header>
 
       {/* Main Studio Canvas Layout */}
-      <main className="canvas-container flex-1">
+      <main className="canvas-container">
         
         {/* PANEL 1: THE BRIEF PANEL (Left) */}
         <section className="panel">
           <div className="panel-header">
-            <span className="panel-title text-[#ff007f]">
-              <Briefcase className="w-4 h-4" /> The Brief Room
+            <span className="panel-title brief-color">
+              <Briefcase style={{ width: '16px', height: '16px' }} /> The Brief Room
             </span>
-            <span className="text-[10px] text-gray-500 font-mono">Create & Lock</span>
+            <span className="form-hint font-mono">Create & Lock</span>
           </div>
 
-          <div className="panel-content space-y-6">
+          <div className="panel-content">
             
             {/* Create Escrow Form */}
-            <div className="bg-[#1c1c22] border border-[#2e2e36] p-5 rounded-lg">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-gray-300 mb-4 flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5 text-[#ff007f]" /> Lock Creative Escrow
+            <div className="studio-card card-primary">
+              <h3 className="card-title">
+                <Lock style={{ width: '14px', height: '14px', color: 'var(--magenta)' }} /> Lock Creative Escrow
               </h3>
               
-              <form onSubmit={handleCreateEscrow} className="space-y-4">
+              <form onSubmit={handleCreateEscrow} className="studio-form">
                 <div className="studio-input-group">
                   <label className="studio-label">Freelancer Address</label>
                   <input 
@@ -198,7 +192,7 @@ function App() {
 
                 <div className="studio-input-group">
                   <label className="studio-label">Escrow Lock Amount (GEN)</label>
-                  <div className="relative">
+                  <div className="studio-input-wrapper">
                     <input 
                       type="number" 
                       step="any"
@@ -208,14 +202,14 @@ function App() {
                       onChange={e => setNewAmount(e.target.value)}
                       required
                     />
-                    <span className="absolute right-4 top-3 text-[10px] font-bold text-gray-500 font-mono">GEN</span>
+                    <span className="input-tag">GEN</span>
                   </div>
                 </div>
 
                 <button 
                   type="submit" 
                   disabled={loading || !address}
-                  className={`studio-btn ${(!address || loading) ? 'btn-disabled' : 'btn-primary'}`}
+                  className={`studio-btn ${(loading || !address) ? 'btn-disabled' : 'btn-primary'}`}
                 >
                   {loading ? 'Processing...' : 'Lock Funds & Register Brief'}
                 </button>
@@ -224,9 +218,9 @@ function App() {
 
             {/* Selected Escrow Brief Details */}
             {selectedEscrow ? (
-              <div className="bg-[#121215] border border-[#2e2e36] p-5 rounded-lg space-y-4">
-                <div className="flex justify-between items-center">
-                  <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#e0ff25]">
+              <div className="studio-card card-dark">
+                <div className="card-header-row">
+                  <h4 className="card-title" style={{ color: 'var(--yellow)', margin: 0 }}>
                     Escrow #{selectedEscrow.id} Specs
                   </h4>
                   <span className={`status-badge ${
@@ -238,38 +232,38 @@ function App() {
                   </span>
                 </div>
 
-                <div className="text-xs space-y-2.5 font-mono text-gray-400">
-                  <div className="flex justify-between">
+                <div className="spec-list">
+                  <div className="spec-item">
                     <span>Client:</span>
-                    <span className="text-white text-right">{selectedEscrow.client.slice(0, 10)}...</span>
+                    <span>{selectedEscrow.client.slice(0, 12)}...{selectedEscrow.client.slice(-4)}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="spec-item">
                     <span>Freelancer:</span>
-                    <span className="text-white text-right">{selectedEscrow.freelancer.slice(0, 10)}...</span>
+                    <span>{selectedEscrow.freelancer.slice(0, 12)}...{selectedEscrow.freelancer.slice(-4)}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="spec-item">
                     <span>Locked Pool:</span>
-                    <span className="text-[#e0ff25] font-bold text-right">
+                    <span style={{ color: 'var(--yellow)', fontWeight: 'bold' }}>
                       {formatGen(selectedEscrow.amount)} GEN
                     </span>
                   </div>
                 </div>
 
-                <div className="border-t border-[#2e2e36] pt-3">
+                <div className="spec-link-wrapper">
                   <span className="studio-label">Brief Source Link</span>
                   <a 
                     href={selectedEscrow.brief_url} 
                     target="_blank" 
                     rel="noreferrer"
-                    className="text-xs text-[#00f0ff] hover:underline flex items-center gap-1 mt-1 break-all"
+                    style={{ textDecoration: 'none', display: 'flex', gap: '4px', alignItems: 'center', marginTop: '6px', fontSize: '0.75rem', color: 'var(--cyan)', wordBreak: 'break-all' }}
                   >
-                    <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
+                    <ExternalLink style={{ width: '12px', height: '12px', flexShrink: 0 }} />
                     {selectedEscrow.brief_url}
                   </a>
                 </div>
               </div>
             ) : (
-              <div className="text-center py-8 text-gray-500 text-xs">
+              <div className="ledger-empty">
                 No active escrows. Initialize one above.
               </div>
             )}
@@ -277,15 +271,15 @@ function App() {
         </section>
 
         {/* PANEL 2: THE DIRECTOR'S DESK (Center) */}
-        <section className="panel bg-[#151518]">
-          <div className="panel-header border-b border-[#2e2e36] bg-[#111113]">
-            <span className="panel-title text-[#e0ff25]">
-              <Sparkles className="w-4 h-4" /> AI Director Desk
+        <section className="panel" style={{ backgroundColor: '#151518' }}>
+          <div className="panel-header" style={{ backgroundColor: '#111113' }}>
+            <span className="panel-title director-color">
+              <Sparkles style={{ width: '16px', height: '16px' }} /> AI Director Desk
             </span>
-            <span className="text-[10px] text-gray-500 font-mono">Arbitrator HUD</span>
+            <span className="form-hint font-mono">Arbitrator HUD</span>
           </div>
 
-          <div className="panel-content flex flex-col justify-between space-y-6">
+          <div className="panel-content">
             
             {/* Circular Alignment Meter */}
             <div className="alignment-meter-container">
@@ -293,9 +287,9 @@ function App() {
                 <svg>
                   <defs>
                     <linearGradient id="meterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ff007f" />
-                      <stop offset="50%" stopColor="#e0ff25" />
-                      <stop offset="100%" stopColor="#00f0ff" />
+                      <stop offset="0%" stopColor="var(--magenta)" />
+                      <stop offset="50%" stopColor="var(--yellow)" />
+                      <stop offset="100%" stopColor="var(--cyan)" />
                     </linearGradient>
                   </defs>
                   <circle className="bg-circle" cx="90" cy="90" r={radius} />
@@ -317,7 +311,7 @@ function App() {
 
             {/* Verdict Stamps */}
             {selectedEscrow && (
-              <div className="flex flex-col items-center">
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 {selectedEscrow.status === 'APPROVED' && (
                   <div className="stamp stamp-approved">
                     [ BRIEF FULFILLED - PAYMENT FORCED ]
@@ -329,48 +323,46 @@ function App() {
                   </div>
                 )}
                 {selectedEscrow.status === 'ACTIVE' && (
-                  <div className="border border-[#2e2e36] px-4 py-2 rounded text-xs font-mono text-center text-gray-500 bg-[#121215]">
+                  <div style={{ border: '1px solid var(--border-color)', padding: '8px 16px', borderRadius: '4px', fontSize: '0.75rem', fontFamily: 'monospace', textAlign: 'center', color: 'var(--text-muted)', backgroundColor: '#121215' }}>
                     Awaiting freelancer submission. Payout locked.
                   </div>
                 )}
               </div>
             )}
 
-            {/* Critique Feedback log (Parchment / Mono Log card) */}
-            <div className="flex-1 flex flex-col justify-end">
-              {selectedEscrow ? (
-                <div className="critique-box">
-                  <h4 className="critique-title flex items-center gap-1">
-                    <Code className="w-3.5 h-3.5" /> Creative Director Critique:
-                  </h4>
-                  <p className="text-gray-300">
-                    {selectedEscrow.director_feedback || 'No review generated yet.'}
-                  </p>
-                </div>
-              ) : (
-                <div className="critique-box text-center py-6 text-gray-600">
-                  Awaiting project contract data
-                </div>
-              )}
-            </div>
+            {/* Critique Feedback log */}
+            {selectedEscrow ? (
+              <div className="critique-box">
+                <h4 className="critique-title flex-items-center">
+                  <Code style={{ width: '14px', height: '14px', marginRight: '6px', verticalAlign: 'middle' }} /> Creative Director Critique:
+                </h4>
+                <p style={{ marginTop: '8px' }}>
+                  {selectedEscrow.director_feedback || 'No review generated yet.'}
+                </p>
+              </div>
+            ) : (
+              <div className="critique-box" style={{ textAlign: 'center', padding: '24px', color: 'var(--text-muted)' }}>
+                Awaiting project contract data
+              </div>
+            )}
 
             {/* Transaction Telemetry Status log */}
             {(txStatus || error) && (
-              <div className="bg-[#121215] border border-[#2e2e36] p-4 rounded text-xs font-mono space-y-2">
-                <div className="flex items-center justify-between text-[10px] text-gray-500">
+              <div className="telemetry-box">
+                <div className="telemetry-header">
                   <span>TELEMETRY FEED</span>
-                  {loading && <RefreshCw className="w-3 h-3 animate-spin text-[#00f0ff]" />}
+                  {loading && <RefreshCw className="spin" style={{ width: '12px', height: '12px', color: 'var(--cyan)' }} />}
                 </div>
-                {txStatus && <p className="text-gray-300 text-xs">{txStatus}</p>}
-                {error && <p className="text-[#ff007f] text-xs">{error}</p>}
+                {txStatus && <p className="telemetry-log">{txStatus}</p>}
+                {error && <p className="telemetry-log telemetry-error">{error}</p>}
                 {txHash && (
-                  <div className="pt-2 border-t border-[#2e2e36] flex justify-between items-center text-[10px]">
-                    <span className="text-gray-500">TX HASH:</span>
+                  <div className="telemetry-tx">
+                    <span>TX HASH:</span>
                     <a 
                       href={`https://studio.genlayer.com/explorer/transaction/${txHash}`}
                       target="_blank" 
                       rel="noreferrer"
-                      className="text-[#00f0ff] hover:underline"
+                      className="telemetry-link"
                     >
                       {txHash.slice(0, 16)}...
                     </a>
@@ -384,22 +376,22 @@ function App() {
         {/* PANEL 3: THE DELIVERY DOCK (Right) */}
         <section className="panel">
           <div className="panel-header">
-            <span className="panel-title text-[#00f0ff]">
-              <Send className="w-4 h-4" /> Delivery Dock & Ledger
+            <span className="panel-title delivery-color">
+              <Send style={{ width: '16px', height: '16px' }} /> Delivery Dock & Ledger
             </span>
-            <span className="text-[10px] text-gray-500 font-mono">Submit & Arbitrate</span>
+            <span className="form-hint font-mono font-bold">Submit & Arbitrate</span>
           </div>
 
-          <div className="panel-content space-y-6">
+          <div className="panel-content">
             
             {/* Freelancer Delivery Submission Form */}
             {selectedEscrow && selectedEscrow.status === 'ACTIVE' && (
-              <div className="bg-[#1c1c22] border border-[#2e2e36] p-5 rounded-lg">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-300 mb-4 flex items-center gap-1.5">
-                  <FileText className="w-3.5 h-3.5 text-[#00f0ff]" /> Submit Completed Work
+              <div className="studio-card card-primary">
+                <h3 className="card-title">
+                  <FileText style={{ width: '14px', height: '14px', color: 'var(--cyan)' }} /> Submit Completed Work
                 </h3>
 
-                <form onSubmit={handleSubmitDelivery} className="space-y-4">
+                <form onSubmit={handleSubmitDelivery} className="studio-form">
                   <div className="studio-input-group">
                     <label className="studio-label">Delivery URL (Figma/GitHub/Drive)</label>
                     <input 
@@ -410,7 +402,7 @@ function App() {
                       onChange={e => setDeliveryUrl(e.target.value)}
                       required
                     />
-                    <p className="text-[10px] text-gray-500 mt-1">
+                    <p className="form-hint" style={{ marginTop: '4px' }}>
                       Note: AI will cross-reference this delivery link against the client's brief link.
                     </p>
                   </div>
@@ -418,7 +410,7 @@ function App() {
                   <button 
                     type="submit" 
                     disabled={loading || !address}
-                    className={`studio-btn ${(!address || loading) ? 'btn-disabled' : 'btn-primary'}`}
+                    className={`studio-btn ${(loading || !address) ? 'btn-disabled' : 'btn-primary'}`}
                   >
                     {loading ? 'Submitting & Evaluating...' : 'Submit Delivery'}
                   </button>
@@ -426,13 +418,13 @@ function App() {
 
                 {/* Manual Release Override (For Clients) */}
                 {address && address.toLowerCase() === selectedEscrow.client.toLowerCase() && (
-                  <div className="border-t border-[#2e2e36] mt-4 pt-4">
-                    <p className="text-[10px] text-gray-400 mb-2">
+                  <div style={{ borderTop: '1px solid var(--border-color)', marginTop: '16px', paddingTop: '16px' }}>
+                    <p className="form-hint" style={{ marginBottom: '8px' }}>
                       Client Option: Skip AI arbitration and pay immediately.
                     </p>
                     <button 
                       onClick={handleReleaseEscrow}
-                      className="studio-btn btn-secondary text-xs"
+                      className="studio-btn btn-secondary"
                       disabled={loading}
                     >
                       Manually Release Funds
@@ -444,52 +436,46 @@ function App() {
 
             {/* Display Completed Delivery Specs */}
             {selectedEscrow && selectedEscrow.delivery_url && (
-              <div className="bg-[#121215] border border-[#2e2e36] p-5 rounded-lg space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#00f0ff]">
+              <div className="studio-card card-dark" style={{ gap: '8px' }}>
+                <h4 className="card-title" style={{ color: 'var(--cyan)', margin: 0 }}>
                   Submitted Delivery Source
                 </h4>
                 <a 
                   href={selectedEscrow.delivery_url} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="text-xs text-[#ff007f] hover:underline flex items-center gap-1 break-all"
+                  style={{ textDecoration: 'none', display: 'flex', gap: '4px', alignItems: 'center', fontSize: '0.75rem', color: 'var(--magenta)', wordBreak: 'break-all' }}
                 >
-                  <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
+                  <ExternalLink style={{ width: '12px', height: '12px', flexShrink: 0 }} />
                   {selectedEscrow.delivery_url}
                 </a>
               </div>
             )}
 
             {/* Escrows Ledger */}
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-300">
-                  Escrow Ledger
-                </h3>
+            <div className="ledger-section">
+              <div className="ledger-header">
+                <h3 className="ledger-header-title">Escrow Ledger</h3>
                 <button 
                   onClick={fetchEscrowsState} 
                   disabled={loading}
-                  className="text-gray-500 hover:text-white p-1 transition-colors"
+                  className="ledger-reload-btn"
                   title="Reload Ledger"
                 >
-                  <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+                  <RefreshCw className={loading ? 'spin' : ''} style={{ width: '14px', height: '14px' }} />
                 </button>
               </div>
 
-              <div className="space-y-2 max-h-[300px] overflow-y-auto pr-1">
+              <div className="ledger-list">
                 {escrows.map((escrow) => (
                   <div 
                     key={escrow.id}
                     onClick={() => setSelectedEscrowId(Number(escrow.id))}
-                    className={`p-3 rounded-lg border text-left cursor-pointer transition-all ${
-                      selectedEscrowId === Number(escrow.id)
-                        ? 'border-[#00f0ff] bg-[#1a2529]'
-                        : 'border-[#2e2e36] bg-[#141418] hover:border-gray-500'
-                    }`}
+                    className={`ledger-card ${selectedEscrowId === Number(escrow.id) ? 'active' : ''}`}
                   >
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs font-bold text-white">Escrow #{escrow.id}</span>
-                      <span className={`status-badge text-[8px] ${
+                    <div className="ledger-card-header">
+                      <span className="ledger-card-id">Escrow #{escrow.id}</span>
+                      <span className={`status-badge ${
                         escrow.status === 'APPROVED' ? 'badge-approved' :
                         escrow.status === 'REJECTED' ? 'badge-rejected' :
                         escrow.status === 'ACTIVE' ? 'badge-active' : 'badge-failed'
@@ -498,15 +484,15 @@ function App() {
                       </span>
                     </div>
 
-                    <div className="text-[10px] text-gray-500 flex justify-between font-mono">
+                    <div className="ledger-card-details">
                       <span>Freelancer: {escrow.freelancer.slice(0, 6)}...{escrow.freelancer.slice(-4)}</span>
-                      <span className="text-[#e0ff25] font-semibold">{formatGen(escrow.amount)} GEN</span>
+                      <span className="amount-value">{formatGen(escrow.amount)} GEN</span>
                     </div>
                   </div>
                 ))}
 
                 {escrows.length === 0 && (
-                  <div className="text-center py-6 text-gray-600 text-xs border border-dashed border-[#2e2e36] rounded-lg">
+                  <div className="ledger-empty">
                     No records found.
                   </div>
                 )}
@@ -519,7 +505,7 @@ function App() {
       </main>
 
       {/* Footer Info */}
-      <footer className="h-8 border-t border-[#2e2e36] bg-[#121214] text-[10px] text-gray-500 flex items-center justify-between px-6">
+      <footer className="studio-footer">
         <span>© 2026 GigBrain Escrow Inc.</span>
         <span>Built with GenLayer Intelligent Arbitrator Core</span>
       </footer>
